@@ -26,31 +26,6 @@ The backend can be implemented using Python. The main components are:
 generate_key(key_text): Validates and converts the key input into bytes.
 encrypt(plaintext, key_text): Encrypts the plaintext using the Blowfish algorithm and returns the ciphertext.
 decrypt(ciphertext, key_text): Decrypts the provided ciphertext back into plaintext.
-Installation
-Clone the repository:
-
-bash
-Copy code
-git clone <repository-url>
-cd <repository-directory>
-If using Flask for the backend, ensure you have Flask installed:
-
-bash
-Copy code
-pip install Flask
-Start the local web server:
-
-For Python 3:
-
-bash
-Copy code
-python -m http.server 8000
-For Flask (run the app):
-
-bash
-Copy code
-python app.py
-Open your web browser and navigate to http://localhost:8000 or http://localhost:5000.
 
 Usage
 Encryption:
