@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blowfish Encryption and Decryption</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Container styling */
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Header styling */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Input and textarea styling */
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Disabled textarea */
+        textarea[readonly] {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+    <body>
+        <div class="container">
+            <h2>Blowfish Encryption and Decryption</h2>
+            
+            <form method="POST">
+                <label for="key">Encryption Key:</label>
+                <input type="text" id="key" name="key" placeholder="Enter key" required>
+                
+                <label for="plaintext">Plaintext:</label>
+                <textarea id="plaintext" name="plaintext" placeholder="Enter text to encrypt"></textarea>
+                
+                <button type="submit" name="action" value="encrypt">Encrypt</button>
+                
+                <label for="ciphertext">Ciphertext (Hex):</label>
+                <textarea id="ciphertext" name="ciphertext" readonly>{{ ciphertext }}</textarea>
+                
+                <button type="submit" name="action" value="decrypt">Decrypt</button>
+                
+                <label for="decrypted">Decrypted Text:</label>
+                <textarea id="decrypted" readonly>{{ decrypted }}</textarea>
+            </form>
+        </div>
+
+    <script>
+        function encrypt() {
+            const key = document.getElementById("key").value;
+            const plaintext = document.getElementById("plaintext").value;
+
+            if (!key || !plaintext) {
+                alert("Please enter both a key and plaintext.");
+                return;
+            }
+
+            // Encrypting with Blowfish
+            const encrypted = CryptoJS.Blowfish.encrypt(plaintext, key);
+            document.getElementById("ciphertext").value = encrypted.toString();
+        }
+
+        function decrypt() {
+            const key = document.getElementById("key").value;
+            const ciphertext = document.getElementById("ciphertext").value;
+
+            if (!key || !ciphertext) {
+                alert("Please enter both a key and ciphertext.");
+                return;
+            }
+
+            // Decrypting with Blowfish
+            const decrypted = CryptoJS.Blowfish.decrypt(ciphertext, key);
+            document.getElementById("decrypted").value = decrypted.toString(CryptoJS.enc.Utf8);
+        }
+    </script>
+</body>
+</html>
