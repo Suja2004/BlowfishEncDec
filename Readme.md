@@ -10,7 +10,7 @@ Decrypts ciphertext back to the original plaintext.
 User-friendly web interface for inputting keys, plaintext, and ciphertext.
 Displays results in hexadecimal format for easy transfer and readability.
 How Blowfish Works
-Key Generation: The encryption key is derived from user input and is validated to ensure it meets the required length (4 to 56 bytes).
+#Key Generation#: The encryption key is derived from user input and is validated to ensure it meets the required length (4 to 56 bytes).
 Initialization Vector (IV): Blowfish uses an IV to enhance security. A random IV is generated during encryption and is prepended to the ciphertext for use during decryption.
 Padding: Since Blowfish operates on fixed-size blocks, plaintext that is not a multiple of the block size is padded before encryption.
 Modes of Operation: The implementation uses CBC (Cipher Block Chaining) mode, which requires an IV and ensures that identical plaintext blocks will produce different ciphertexts.
