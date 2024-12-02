@@ -1,33 +1,72 @@
-# Blowfish Encryption and Decryption in Python
+# Blowfish Encryption and Decryption
 
-This project demonstrates how to use the Blowfish encryption algorithm to securely encrypt and decrypt messages in Python. The implementation includes padding to handle variable-length plaintext and a secure cipher block chaining (CBC) mode for encryption.
+## Overview
 
-## How It Works
+Blowfish is a symmetric-key block cipher designed to be fast and secure. It encrypts data in fixed-size blocks (64 bits) using a variable-length key, ranging from 32 bits to 448 bits. Blowfish is widely used for encrypting sensitive data due to its speed and effectiveness, making it a popular choice in various applications.
 
-### 1. Key Generation
-- A valid encryption key must be between **4 and 56 bytes** in length.
-- The user provides a key as a string, which is then encoded into bytes for encryption and decryption.
+This repository contains a simple web application for Blowfish encryption and decryption, using JavaScript for the frontend and Python for the backend (with optional Flask integration).
 
-### 2. Encryption Process
-- The plaintext message is converted to bytes and padded to ensure its length is a multiple of the Blowfish block size (8 bytes).
-- A random **Initialization Vector (IV)** is generated to make the encryption secure and unique.
-- The Blowfish cipher, in CBC mode, encrypts the padded plaintext.
-- The resulting ciphertext includes the IV prepended to the encrypted message for use during decryption.
+## Features
 
-### 3. Decryption Process
-- The IV is extracted from the first 8 bytes of the ciphertext.
-- The remaining bytes represent the actual encrypted message.
-- The Blowfish cipher is recreated with the same key and IV to decrypt the message.
-- The decrypted message is unpadded to retrieve the original plaintext.
+- Encrypts plaintext into ciphertext using the Blowfish algorithm.
+- Decrypts ciphertext back to the original plaintext.
+- User-friendly web interface for inputting keys, plaintext, and ciphertext.
+- Displays results in hexadecimal format for easy transfer and readability.
 
----
+## How Blowfish Works
 
-## Prerequisites
+### Key Generation
+The encryption key is derived from user input and is validated to ensure it meets the required length (4 to 56 bytes).
 
-To run this project, you need:
-- Python 3.x
-- `pycryptodome` library (for Blowfish encryption)
+### Initialization Vector (IV)
+Blowfish uses an IV to enhance security. A random IV is generated during encryption and is prepended to the ciphertext for use during decryption.
 
-Install the required library using pip:
-```bash
-pip install pycryptodome
+### Padding
+Since Blowfish operates on fixed-size blocks, plaintext that is not a multiple of the block size is padded before encryption.
+
+### Modes of Operation
+The implementation uses CBC (Cipher Block Chaining) mode, which requires an IV and ensures that identical plaintext blocks will produce different ciphertexts.
+
+## Implementation
+
+### Frontend (HTML/CSS/JavaScript)
+
+The web application is built using HTML for structure, CSS for styling, and JavaScript for the encryption and decryption logic. The main JavaScript functions are as follows:
+
+- **encrypt()**: This function takes user input for the key and plaintext, encrypts the plaintext using the Blowfish algorithm, and displays the ciphertext.
+- **decrypt()**: This function takes the ciphertext input, decrypts it using the provided key, and displays the original plaintext.
+
+### Backend (Python)
+
+The backend can be implemented using Python. The main components are:
+
+- **generate_key(key_text)**: Validates and converts the key input into bytes.
+- **encrypt(plaintext, key_text)**: Encrypts the plaintext using the Blowfish algorithm and returns the ciphertext.
+- **decrypt(ciphertext, key_text)**: Decrypts the provided ciphertext back into plaintext.
+
+## Usage
+
+### Encryption:
+
+1. Enter your encryption key (4-56 characters).
+2. Input the plaintext message to encrypt.
+3. Click "Encrypt" to view the ciphertext in hexadecimal format.
+
+### Decryption:
+
+1. Enter the same encryption key.
+2. Paste the ciphertext (in hexadecimal format) into the input field.
+3. Click "Decrypt" to view the original plaintext message.
+
+### Example
+
+- **Key**: `mysecretkey`  
+- **Plaintext**: `Hello, World!`  
+- **Ciphertext (Hex)**: `1a2b3c4d5e6f7081...`  
+- **Decrypted Text**: `Hello, World!`
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/blowfish-encryption-decryption.git
