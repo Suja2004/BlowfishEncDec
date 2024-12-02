@@ -1,53 +1,33 @@
-# Blowfish Encryption and Decryption with Flask
+# Blowfish Encryption and Decryption in Python
 
-## Introduction
+This project demonstrates how to use the Blowfish encryption algorithm to securely encrypt and decrypt messages in Python. The implementation includes padding to handle variable-length plaintext and a secure cipher block chaining (CBC) mode for encryption.
 
-This project demonstrates the use of the Blowfish encryption algorithm for secure data encryption and decryption. The application is built using Python and Flask, allowing users to interact with encryption and decryption functionalities through a web interface.
+## How It Works
 
----
+### 1. Key Generation
+- A valid encryption key must be between **4 and 56 bytes** in length.
+- The user provides a key as a string, which is then encoded into bytes for encryption and decryption.
 
-## What is Blowfish?
+### 2. Encryption Process
+- The plaintext message is converted to bytes and padded to ensure its length is a multiple of the Blowfish block size (8 bytes).
+- A random **Initialization Vector (IV)** is generated to make the encryption secure and unique.
+- The Blowfish cipher, in CBC mode, encrypts the padded plaintext.
+- The resulting ciphertext includes the IV prepended to the encrypted message for use during decryption.
 
-Blowfish is a symmetric-key block cipher designed to provide fast and secure encryption. It is widely used due to its simplicity and efficiency. 
-
-### Key Features of Blowfish:
-1. **Symmetric Key**: Uses the same key for encryption and decryption.
-2. **Variable Key Length**: Supports key lengths between 32 and 448 bits.
-3. **Block Size**: Operates on 64-bit blocks of data.
-4. **Security**: Known for being fast and secure when used with proper key management.
-
-### How It Works:
-- The plaintext is divided into fixed-size blocks (64 bits).
-- Each block undergoes multiple rounds of transformation using the key.
-- The result is a ciphertext that is difficult to reverse without the key.
-
----
-
-## About This Project
-
-### Features:
-1. Encrypt plaintext using a key.
-2. Decrypt ciphertext back into plaintext using the same key.
-3. Web-based interface to input plaintext, keys, and view results.
-
-### Code Highlights:
-- **Key Management**: Ensures the key length is valid (4-56 characters) for simplicity.
-- **Padding**: Adds padding to ensure data fits the block size (64 bits).
-- **XOR-Based Implementation**: For educational purposes, a simple XOR operation is used instead of a real cryptographic library for encryption.
-- **Hex Encoding**: Outputs ciphertext in hexadecimal format for easy sharing and readability.
+### 3. Decryption Process
+- The IV is extracted from the first 8 bytes of the ciphertext.
+- The remaining bytes represent the actual encrypted message.
+- The Blowfish cipher is recreated with the same key and IV to decrypt the message.
+- The decrypted message is unpadded to retrieve the original plaintext.
 
 ---
 
-## How to Use
+## Prerequisites
 
-### Prerequisites:
-1. Python 3.x installed on your system.
-2. Flask installed (`pip install flask`).
+To run this project, you need:
+- Python 3.x
+- `pycryptodome` library (for Blowfish encryption)
 
-### Running the Application:
-1. Clone this repository or download the project files.
-2. Save the Python code in a file named `app.py`.
-3. Create an `index.html` file inside a `templates` folder for the user interface.
-4. Run the Flask application:
-   ```bash
-   python app.py
+Install the required library using pip:
+```bash
+pip install pycryptodome
