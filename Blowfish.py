@@ -34,16 +34,15 @@ def encrypt(plaintext, key_text):
     """
     key = generate_key(key_text)
     block_size = 8
-    iv = b"12345678"  # Example fixed IV (not secure in real scenarios)
+    iv = b"12345678"  
     plaintext = pad(plaintext.encode('utf-8'), block_size)
 
     ciphertext = bytearray()
     for i in range(0, len(plaintext), block_size):
         block = plaintext[i:i+block_size]
-        # Basic XOR encryption
         encrypted_block = bytes(a ^ b for a, b in zip(block, iv))
         ciphertext.extend(encrypted_block)
-        iv = encrypted_block  # Update IV for CBC mode
+        iv = encrypted_block 
 
     return ciphertext
 
