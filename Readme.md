@@ -1,60 +1,53 @@
-# Blowfish Encryption and Decryption
+# Blowfish Encryption and Decryption with Flask
 
-## Overview
-Blowfish is a symmetric-key block cipher that is designed to be fast and secure. It encrypts data in fixed-size blocks (64 bits) using a variable-length key, ranging from 32 bits to 448 bits. Blowfish is widely used for encrypting sensitive data due to its speed and effectiveness, making it a popular choice in various applications.
+## Introduction
 
-This repository contains a simple web application for Blowfish encryption and decryption using JavaScript for the frontend and Python for the backend (with optional Flask integration).
+This project demonstrates the use of the Blowfish encryption algorithm for secure data encryption and decryption. The application is built using Python and Flask, allowing users to interact with encryption and decryption functionalities through a web interface.
 
-## Features
-- Encrypts plaintext into ciphertext using the Blowfish algorithm.
-- Decrypts ciphertext back to the original plaintext.
-- User-friendly web interface for inputting keys, plaintext, and ciphertext.
-- Displays results in hexadecimal format for easy transfer and readability.
+---
 
-## How Blowfish Works
+## What is Blowfish?
 
-### Key Generation
-The encryption key is derived from user input and is validated to ensure it meets the required length (4 to 56 bytes).
+Blowfish is a symmetric-key block cipher designed to provide fast and secure encryption. It is widely used due to its simplicity and efficiency. 
 
-### Initialization Vector (IV)
-Blowfish uses an IV to enhance security. A random IV is generated during encryption and is prepended to the ciphertext for use during decryption.
+### Key Features of Blowfish:
+1. **Symmetric Key**: Uses the same key for encryption and decryption.
+2. **Variable Key Length**: Supports key lengths between 32 and 448 bits.
+3. **Block Size**: Operates on 64-bit blocks of data.
+4. **Security**: Known for being fast and secure when used with proper key management.
 
-### Padding
-Since Blowfish operates on fixed-size blocks, plaintext that is not a multiple of the block size is padded before encryption.
+### How It Works:
+- The plaintext is divided into fixed-size blocks (64 bits).
+- Each block undergoes multiple rounds of transformation using the key.
+- The result is a ciphertext that is difficult to reverse without the key.
 
-### Modes of Operation
-The implementation uses CBC (Cipher Block Chaining) mode, which requires an IV and ensures that identical plaintext blocks will produce different ciphertexts.
+---
 
-## Implementation
+## About This Project
 
-### Frontend (HTML/CSS/JavaScript)
-The web application is built using HTML for structure, CSS for styling, and JavaScript for the encryption and decryption logic. The main JavaScript functions are as follows:
+### Features:
+1. Encrypt plaintext using a key.
+2. Decrypt ciphertext back into plaintext using the same key.
+3. Web-based interface to input plaintext, keys, and view results.
 
-- `encrypt()`: This function takes user input for the key and plaintext, encrypts the plaintext using the Blowfish algorithm, and displays the ciphertext.
-- `decrypt()`: This function takes the ciphertext input, decrypts it using the provided key, and displays the original plaintext.
+### Code Highlights:
+- **Key Management**: Ensures the key length is valid (4-56 characters) for simplicity.
+- **Padding**: Adds padding to ensure data fits the block size (64 bits).
+- **XOR-Based Implementation**: For educational purposes, a simple XOR operation is used instead of a real cryptographic library for encryption.
+- **Hex Encoding**: Outputs ciphertext in hexadecimal format for easy sharing and readability.
 
-### Backend (Python)
-The backend can be implemented using Python. The main components are:
+---
 
-- `generate_key(key_text)`: Validates and converts the key input into bytes.
-- `encrypt(plaintext, key_text)`: Encrypts the plaintext using the Blowfish algorithm and returns the ciphertext.
-- `decrypt(ciphertext, key_text)`: Decrypts the provided ciphertext back into plaintext.
+## How to Use
 
-## Usage
+### Prerequisites:
+1. Python 3.x installed on your system.
+2. Flask installed (`pip install flask`).
 
-### Encryption
-1. Enter your encryption key (4-56 characters).
-2. Input the plaintext message to encrypt.
-3. Click "Encrypt" to view the ciphertext in hexadecimal format.
-
-### Decryption
-1. Enter the same encryption key.
-2. Paste the ciphertext (in hexadecimal format) into the input field.
-3. Click "Decrypt" to view the original plaintext message.
-
-## Example
-
-- **Key**: `mysecretkey`
-- **Plaintext**: `Hello, World!`
-- **Ciphertext (Hex)**: `1a2b3c4d5e6f7081...`
-- **Decrypted Text**: `Hello, World!`
+### Running the Application:
+1. Clone this repository or download the project files.
+2. Save the Python code in a file named `app.py`.
+3. Create an `index.html` file inside a `templates` folder for the user interface.
+4. Run the Flask application:
+   ```bash
+   python app.py
